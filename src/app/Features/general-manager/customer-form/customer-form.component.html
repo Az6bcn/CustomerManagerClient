@@ -1,0 +1,61 @@
+<div class="container">
+  <div class =" col-sm-6">
+    <form [formGroup]="customerForm">
+
+      <div formGroupName="customerGroup">
+          <div class="form-group">
+              <label for="FirstnameLabel">Firstname</label>
+              <input formControlName="firstname" formtype="text" class="form-control" id="FirstnameId"placeholder="Enter your firstname">
+             <!--Another VALIDATION method get it from ts-->
+                <div *ngIf="Firstname.touched && Firstname.invalid" class="alert alert-danger"> 
+                  <div *ngIf="Firstname.errors.required"> Please enter your Firstname</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="LastnameLabel">Lastname</label>
+                <input formControlName="lastname" formtype="text" class="form-control" id="LastnameId"placeholder="Enter your lastname">
+               <!--Another VALIDATION method get it from ts-->
+                  <div *ngIf="Lastname.touched && Lastname.invalid" class="alert alert-danger"> 
+                    <div *ngIf="Lastname.errors.required"> Your lastname is required</div>
+                  </div>
+              </div>
+
+            
+              <div class="form-group">
+                  <label for="CountryLabel">Select your Country</label>
+                  <ng-select formControlName="country"
+                  [options]="externalCountriesListAPI">
+                </ng-select>
+                  <!--Another VALIDATION method get it from ts-->
+                    <div *ngIf="Country.touched && Country.invalid" class="alert alert-danger"> 
+                      <div *ngIf="Country.errors.required"> Select your Country from the dropdown list</div>
+                    </div>
+                
+                </div>
+
+              
+              <div class="form-group">
+                    <label for="CityLabel">City</label>
+                    <input formControlName="city" formtype="text" class="form-control" id="cityId"placeholder="Please enter your city">
+                   <!--Another VALIDATION method get it from ts-->
+                      <div *ngIf="City.touched && City.invalid" class="alert alert-danger"> 
+                        <div *ngIf="City.errors.required">Please enter your city</div>
+                      </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input formControlName="phone" formtype="text" class="form-control" id="phone"placeholder="Please enter your phone number">
+                   <!--Another VALIDATION method get it from ts-->
+                      <div *ngIf="Phone.touched && Phone.invalid" class="alert alert-danger"> 
+                        <div *ngIf="Phone.errors.required">Please enter your city</div>
+                      </div>
+                </div>
+
+                
+      </div>
+    </form>
+  </div>
+</div>

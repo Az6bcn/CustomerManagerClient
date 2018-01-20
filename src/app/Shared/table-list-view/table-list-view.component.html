@@ -1,0 +1,46 @@
+<section > 
+  <table class="table table-striped table-hover table-bordered">
+    <thead class="thead-dark" *ngIf="tableHeader && tableHeader != null">
+
+      <tr *ngIf="modelType == 'Customers'">
+        <th>#</th>
+        <th>{{tableHeader.FirstName}}</th>
+        <th>{{tableHeader.Lastname}}</th>
+        <th>{{tableHeader.City}}</th>
+        <th>{{tableHeader.Country}}</th>
+        <th>{{tableHeader.Phone}}</th>
+        <th>{{tableHeader.Orders}}</th>
+        <th></th>
+      </tr>
+
+      <tr *ngIf="modelType == 'Products'">
+          <th>#</th>
+          <th>{{tableHeader.name}}</th>
+          <th>{{tableHeader.package}}</th>
+          <th>{{tableHeader.unitPrice}}</th>
+          <th>{{tableHeader.IsDiscontinued}}</th>
+        </tr>
+    
+    </thead>
+    <tbody *ngIf="!(isLoading$ | async)">
+      <tr *ngFor="let data of dataToShowOnTable; let i = index">
+        <td>{{ i }}</td>
+        <td>{{data.firstName || data.productName}}</td>
+        <td>{{data.lastName || data.package}}</td>
+        <td>{{data.phone || data.unitPrice}}</td>
+        <td>{{data.city || data.isDiscontinued}}</td>
+        <td>{{data.country}} </td>
+        <!-- <td>{{data.order}}</td>  -->
+        <!-- make it a like to orders page and send the order to the order page -->
+      </tr>
+ 
+    </tbody>
+  </table> 
+
+  <app-pagination
+[dataForTable]= "dataForTable"
+(dataForTableEmit) = "paginatedDataToDisplayOnTable($event)">
+  </app-pagination>
+  </section>
+
+  <!-- {{isLoading$.value}} -->

@@ -1,0 +1,36 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+     <a class="navbar-brand" >CustomerManagementApp</a>
+    </div>
+    <div *ngIf = "isLoggedIn$ | async">
+      <ul class="nav navbar-nav" *ngFor="let menu of menuToLoad">
+       
+         <li>
+          <a routerLink = {{menu.route}}>{{menu.Title}} </a>
+        </li>
+
+      </ul>
+    </div> 
+
+      <ul class="nav navbar-nav navbar-right">
+
+              <li routerLinkActive="active current" *ngIf="!hideLogin()">
+                <a routerLink = "/account/login">Login </a>
+              </li>
+              
+              <li routerLinkActive="active current" *ngIf="!hideLogin()">
+                <a routerLink = "/account/register">Register</a>
+              </li>
+
+              <li routerLinkActive="active current" *ngIf="hideLogin()">
+                  <a (click)="logOut()">Log Out</a>
+                </li>
+
+              <li routerLinkActive="active current">
+                <a routerLink = "/home">HomePage</a>
+              </li>
+      </ul>
+      
+    </div>
+</nav>

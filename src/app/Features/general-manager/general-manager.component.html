@@ -1,0 +1,35 @@
+<div class="container">
+
+  <div class="row">
+    <ul>
+      <li class="li">
+        <span tooltip="Customers CardView" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
+          <i class="fa fa-id-card fa-2x" aria-hidden="true" (click)='showCustomerCards()'>
+          </i>
+          &nbsp;
+        </span>
+      </li>
+      <li class="li">
+        <span tooltip="Customer List View" [tooltipDisabled]="false" [tooltipAnimation]="true" tooltipPlacement="top">
+          <i class="fa fa-list fa-2x" aria-hidden="true" (click)='showTableForListView()'></i>
+        </span>
+      </li>
+    </ul>
+  </div>
+
+  <div *ngIf="listView">
+    "holllllaaaaa"
+  </div>
+
+
+  <div *ngIf="showTable">
+      <button type="button" class="btn btn-link" (click)="newCustomerFormpage()"> 
+        Add New Cuctomer 
+      </button>
+      
+    <div class="container" *ngIf="!(isLoading$ | async)">
+      <app-table-list-view [dataForTable]="CustomersAndOrders" [tableHeader]="getHeaderObject()" [modelType]="getModelType()">
+      </app-table-list-view>
+    </div>
+  </div>
+</div>

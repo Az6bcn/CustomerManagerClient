@@ -1,0 +1,76 @@
+<div class="container ">
+    <div class="col-sm-6">
+  <form [formGroup]="registerForm">
+  
+    <!-- FormGroup: all the Controls that makes up the FormGroup -->
+  <div  formGroupName="registerGroup">
+
+      <div class="form-group">
+        <label for="tEmail1">Username</label>
+        <input formControlName="Username" formtype="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your email">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+       <!--Another VALIDATION method for Username: is to get it from ts-->
+          <div *ngIf="username.touched && username.invalid" class="alert alert-danger"> 
+            <div *ngIf="username.errors.required"> Please enter a Username</div>
+          </div>
+      </div>
+  
+
+      <div class="form-group">
+        <label for="Password">Password</label>
+        <input  formControlName="Password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+  <!--Another VALIDATION method for Password: is to get it from ts-->
+        <div *ngIf="password.touched && password.invalid" class="alert alert-danger">
+          <div *ngIf="password.errors.required">Password is required to register</div>
+        </div>
+     </div>
+    
+
+     <div class="form-group">
+      <label for="Email">Email</label>
+      <input formControlName="Email" formtype="email" class="form-control" id="exampleInputEmail2" aria-describedby="emailHelp" placeholder="Enter your email">
+      <small id="emailHelp2" class="form-text text-muted">We'll never share your email with anyone else.</small>
+     <!--Another VALIDATION method for Email: is to get it from ts-->
+        <div *ngIf="email.touched && email.invalid" class="alert alert-danger"> 
+          <div *ngIf="email.errors.required"> Please enter your Email</div>
+        </div>
+    </div>
+
+    <div class="form-group">
+      <label for="Firstname">Firstname</label>
+      <input  formControlName="Firstname" type="text" class="form-control" id="exampleInputPassword3" placeholder="Enter your firstname">
+<!--Another VALIDATION method for Firstname: is to get it from ts-->
+      <div *ngIf="firstname.touched && firstname.invalid" class="alert alert-danger">
+        <div *ngIf="firstname.errors.required">Firstname is required to register</div>
+      </div>
+   </div>
+
+   <div class="form-group">
+    <label for="Lastname">Lastname</label>
+    <input  formControlName="Lastname" type="text" class="form-control" id="exampleInputPassword2" placeholder="Enter your lastname">
+<!--Another VALIDATION method for Lastname: is to get it from ts-->
+    <div *ngIf="lastname.touched && lastname.invalid" class="alert alert-danger">
+      <div *ngIf="lastname.errors.required">Lastname is required to register</div>
+    </div>
+ </div>
+
+<div >
+    <label for="Role">Select your Managerial Role</label>
+ <ng-select formControlName="Role"
+ [options]="managerialRoleOptions">
+</ng-select>
+<!--Another VALIDATION method for Lastname: is to get it from ts-->
+<div *ngIf="role.touched && role.invalid" class="alert alert-danger">
+    <div *ngIf="role.errors.required">Please select your role from the dropdown</div>
+  </div>
+</div>
+
+<div>
+      <button type="submit" [disabled]="isValid()" class="btn btn-primary text-center" 
+      (click)="registerUser(registerForm.controls['registerGroup'].value)">Register</button>
+    </div>
+  </div>
+  </form>
+  </div>
+</div>
+  

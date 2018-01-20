@@ -1,0 +1,8 @@
+
+
+<div class="content" *ngIf="!(isLoading$ | async)">
+<app-table-list-view [dataForTable]="dataForTable" 
+                     [tableHeader]="getHeaderObject()"
+                     [modelType]="getModelType()" ></app-table-list-view>
+</div>
+
