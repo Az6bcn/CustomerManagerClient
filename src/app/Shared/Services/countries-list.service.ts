@@ -17,7 +17,7 @@ private url: string;
   this.url = 'http://vocab.nic.in/rest.php/country/json';
     return this.http.get(this.url)
 
-    .map(response => response.json() as Array<Country>);
+    .map(response => response.json());
   }
 }
 
