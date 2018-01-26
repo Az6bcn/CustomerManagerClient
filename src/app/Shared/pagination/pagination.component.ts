@@ -1,37 +1,35 @@
-import { Customer } from './../../Model/Customer';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Customer } from "./../../Model/Customer";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 
 @Component({
-  selector: 'app-pagination',
-  templateUrl: './pagination.component.html',
-  styleUrls: ['./pagination.component.css']
+  selector: "app-pagination",
+  templateUrl: "./pagination.component.html",
+  styleUrls: ["./pagination.component.css"]
 })
 export class PaginationComponent implements OnInit {
-
-
-  private pageNumber: number;
-  private totalPages: number;
-  private currentIndex: number = 1;
-  private isVisible: boolean = false;
-  private previousEnabled: boolean = false;
-  private nextEnabled: boolean = true;
-  private items: Array<Customer>;
-  private pages: number = 4;
-  private pageSize: number = 10;
+  pageNumber: number;
+  totalPages: number;
+  currentIndex: number = 1;
+  isVisible: boolean = false;
+  previousEnabled: boolean = false;
+  nextEnabled: boolean = true;
+  items: Array<Customer>;
+  pages: number = 4;
+  pageSize: number = 10;
 
   pagesIndex: Array<number>;
   pageStart: number = 1;
-  inputName: string = '';
+  inputName: string = "";
   @Input() dataForTable: Array<Customer>;
-  @Output() dataForTableEmit= new EventEmitter<Array<Customer>>();
-  constructor() { }
+  @Output() dataForTableEmit = new EventEmitter<Array<Customer>>();
+  constructor() {}
 
   ngOnInit() {
     this.currentIndex = 1;
     this.pageStart = 1;
     this.pages = 4;
 
-    this.pageNumber = parseInt("" + (this.dataForTable.length / this.pageSize));
+    this.pageNumber = parseInt("" + this.dataForTable.length / this.pageSize);
     if (this.dataForTable.length % this.pageSize != 0) {
       this.pageNumber++;
     }
@@ -41,26 +39,30 @@ export class PaginationComponent implements OnInit {
     }
 
     this.refreshItems();
-    if(this.items)
-    this.dataForTableEmit.emit(this.items);
+    if (this.items) this.dataForTableEmit.emit(this.items);
   }
 
   private fillArray(): any {
     var obj = new Array();
-    for (var index = this.pageStart; index < this.pageStart + this.pages; index++) {
+    for (
+      var index = this.pageStart;
+      index < this.pageStart + this.pages;
+      index++
+    ) {
       obj.push(index);
     }
     return obj;
   }
 
-
   private refreshItems() {
-    this.items = this.dataForTable.slice((this.currentIndex - 1) * this.pageSize, (this.currentIndex) * this.pageSize);
+    this.items = this.dataForTable.slice(
+      (this.currentIndex - 1) * this.pageSize,
+      this.currentIndex * this.pageSize
+    );
     this.pagesIndex = this.fillArray();
   }
 
-
-  private prevPage() {
+  prevPage() {
     if (this.currentIndex > 1) {
       this.currentIndex--;
     }
@@ -72,12 +74,11 @@ export class PaginationComponent implements OnInit {
     this.dataForTableEmit.emit(this.items);
   }
 
-
-  private nextPage() {
+  nextPage() {
     if (this.currentIndex < this.pageNumber) {
       this.currentIndex++;
     }
-    if (this.currentIndex >= (this.pageStart + this.pages)) {
+    if (this.currentIndex >= this.pageStart + this.pages) {
       this.pageStart = this.currentIndex - this.pages + 1;
     }
     this.refreshItems();
@@ -85,14 +86,10 @@ export class PaginationComponent implements OnInit {
     this.dataForTableEmit.emit(this.items);
   }
 
-
   private setPage(index: number) {
     this.currentIndex = index;
     this.refreshItems();
   }
-
-
-
 }
 
 /*
