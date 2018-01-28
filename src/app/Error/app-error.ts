@@ -1,11 +1,11 @@
 // ES6 Modules or TypeScript
-import swal from 'sweetalert2'
+import swal from 'sweetalert2';
 
 export class AppError {
 
     constructor(public originalError?: any) {
 
-            var originalErrorObject = JSON.parse(originalError._body);
+            const originalErrorObject = JSON.parse(originalError._body);
             this.displayError(originalErrorObject);
     }
 
@@ -16,6 +16,6 @@ export class AppError {
             title: originalErrorObject.errorMessage,
             showConfirmButton: false,
             timer: 3500
-        })
+        });
     }
 }

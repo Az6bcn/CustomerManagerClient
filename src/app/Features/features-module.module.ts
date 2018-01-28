@@ -25,13 +25,13 @@ import { CountriesListService } from '../Shared/Services/countries-list.service'
     ReactiveFormsModule,
     SelectModule
   ],
-  declarations: [GeneralManagerComponent, 
-    SectionManagerComponent, 
+  declarations: [GeneralManagerComponent,
+    SectionManagerComponent,
     ProductsManagerComponent, OrdersComponent, ProductsComponent, CustomerFormComponent],
   providers: [CustomerServiceService, ProductServiceService, CountriesListService]
 })
 export class FeaturesModuleModule { }
 
-/* 
+/*
 if don't import the routeModule (routing-module) for this module (FeatureModule),
-Error: Error in Maximum call stack size exceeded */ 
+Error: Error in Maximum call stack size exceeded */

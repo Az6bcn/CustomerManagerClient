@@ -28,18 +28,18 @@ headers.append( 'Content-Type', 'application/json' );
 headers.append('Access-Control-Allow-Headers', 'Content-Type');
 headers.append('Access-Control-Allow-Methods', '  POST');
 headers.append('Access-Control-Allow-Origin', '*');
-let options = new RequestOptions( {headers: headers});
+const options = new RequestOptions( {headers: headers});
 
-this.url= "http://localhost:53800/api/accounts/login"
+this.url= 'http://localhost:53800/api/accounts/login';
   return this.http.post(this.url, credentials, options)
-  .map(response => {     //Use MAP OPERATOR to Transform the Response to Javascript Array.
+  .map(response => {     // Use MAP OPERATOR to Transform the Response to Javascript Array.
     const tokenAuthenticationResponse = response.json();
         if (tokenAuthenticationResponse && tokenAuthenticationResponse.auth_token && tokenAuthenticationResponse.auth_token.Result){
           // add to local storage
           localStorage.setItem('token', tokenAuthenticationResponse.auth_token.Result)
           return true;
         }
-        else 
+        else
         return false;
   })
   ._catch(this.handleError);
@@ -49,7 +49,7 @@ this.url= "http://localhost:53800/api/accounts/login"
 /**
  * Logs out user, removing token from local storage
  */
-logOut(){
+logOut() {
   // remove token from local storage
  localStorage.removeItem('token');
 }
@@ -57,7 +57,7 @@ logOut(){
 /**
  * Checks local storage for Token, if no token user already logged out/ not signed in
  */
-checkLocalStorageForToken(){
+checkLocalStorageForToken() {
 return (localStorage.getItem('token') != null) ? true : false;
 }
 
@@ -65,12 +65,12 @@ return (localStorage.getItem('token') != null) ? true : false;
 /**
  * Gets logged-in user's claims
  */
-getLoggedInUserClaims(){ 
-  
+getLoggedInUserClaims(){
+
   const token = localStorage.getItem('token');
 
-  if(!token) return null;
-  else{
+  if (!token) return null;
+  else {
     // Decode the token
     return new JwtHelper().decodeToken(token);
   }
@@ -78,14 +78,14 @@ getLoggedInUserClaims(){
 }
 
 /**
- * Checks if user is loggedIn by checking for valid tokenNotExpired in the Local Storage. 
+ * Checks if user is loggedIn by checking for valid tokenNotExpired in the Local Storage.
  * returns true if there's valid token that's not expired
- * returns false in contrary case 
+ * returns false in contrary case
  */
-isLoggedIn(){
+isLoggedIn() {
   return tokenNotExpired('token');
 }
-  
+
 
 
 
@@ -96,25 +96,25 @@ headers.append( 'Content-Type', 'application/json' );
 headers.append('Access-Control-Allow-Headers', 'Content-Type');
 headers.append('Access-Control-Allow-Methods', '  POST');
 headers.append('Access-Control-Allow-Origin', '*');
-let options = new RequestOptions( {headers: headers});
+const options = new RequestOptions( {headers: headers});
 
-this.url= "http://localhost:53800/api/accounts"
+this.url = 'http://localhost:53800/api/accounts';
 
   return this.http.post(this.url, registerCredentials, options)
   .map(response =>  response.json())
-       //Catch the error Object which is an Instance of the Response class
-       ._catch(this.handleError); //Not calling the Method, just passing a Refrence
+       // Catch the error Object which is an Instance of the Response class
+       ._catch(this.handleError); // Not calling the Method, just passing a Refrence
 }
 
 
 
-//Method to handle Server Response Error
+// Method to handle Server Response Error
 private handleError(error: Response) {
 
   /* Handling Expected Error (Imagine we sending invalid data to the Server response will be Bad Request, status code 400)
           check the status of the response  */
-  if (error.status === 400){
-    //return Observable that includes an error and throw an error specific to our application domain type error (BadRequestError)
+  if (error.status === 400) {
+    // return Observable that includes an error and throw an error specific to our application domain type error (BadRequestError)
     return Observable.throw(new BadRequestError(error));
   }
 
@@ -122,12 +122,11 @@ private handleError(error: Response) {
   /* Handling Expected Error (The post might already been deleted and the Server response will be Not found, status code 404):
   check the status of the response )*/
   if (error.status === 404) {
-    //return Observable that includes an error and throw an error specific to our application  domain type error (NotFoundError)
-    return Observable.throw(new NotFoundError())
+    // return Observable that includes an error and throw an error specific to our application  domain type error (NotFoundError)
+    return Observable.throw(new NotFoundError());
   }
 
-//return Observable that includes an error and throw an error (unknown) to our application  domain type error (AppError)
+// return Observable that includes an error and throw an error (unknown) to our application  domain type error (AppError)
     return Observable.throw(new AppError(error));
 }
 }
-      
