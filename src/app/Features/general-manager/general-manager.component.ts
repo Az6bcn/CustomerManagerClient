@@ -40,6 +40,7 @@ export class GeneralManagerComponent implements OnInit {
   }
 
   private getCustomerData() {
+    this.isLoading$.next(true);
     this.customerService.getCustomersAndOrder().subscribe(response => {
       this.CustomersAndOrders = response;
       this.showTableForListView();

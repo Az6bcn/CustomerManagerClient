@@ -8,8 +8,8 @@
       <input formControlName="Username" formtype="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter your email">
       <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
       <!-- VALIDATION Username: to access: logInForm.controls['myFormGroup'].get('specificControlInFormGroup')-->
-      <div *ngIf="logInForm.controls['loginGroup'].get('Username').touched 
-        && logInForm.controls['loginGroup'].get('Username').invalid" class="alert alert-danger"> 
+      <div *ngIf="logInForm.controls['loginGroup'].get('Username').touched
+        && logInForm.controls['loginGroup'].get('Username').invalid" class="alert alert-danger">
 
           <div *ngIf="logInForm.controls['loginGroup'].get('Username').errors.required"> Please enter a Username</div>
         </div>
@@ -23,10 +23,16 @@
       <div *ngIf="password.errors.required">Password is required</div>
     </div>
     </div>
-  
-    <button type="submit" [disabled]="isValid()" class="btn btn-primary text-center" 
-    (click)="signInAndRedirectUser(logInForm.controls['loginGroup'].value)">Sign In</button>
+
+    <button type="submit" [disabled]="isValid()" class="btn btn-primary text-center"
+    (click)="signInAndRedirectUser(logInForm.controls['loginGroup'].value)">Sign In
+    <span class="text-center" *ngIf="(isLoading$ | async)">
+    <i class="fa fa-spinner fa-3x" aria-hidden="true">
+    </i>
+  </span>
+    </button>
   </div>
+  
 </form>
 </div>
 
@@ -34,7 +40,7 @@
 
 
 
-<!-- 
+<!--
 <p>loginGroupFormFormGroupUsernameControl value: {{ logInForm.controls['loginGroup'].get('Username').status }}</p>
 <p>loginGroupFormFormGroup value: {{ logInForm.controls['loginGroup'].value }}</p>
 <p>PasswordControl value: {{ password}}</p>

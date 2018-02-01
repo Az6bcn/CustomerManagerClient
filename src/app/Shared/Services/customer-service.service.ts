@@ -11,6 +11,7 @@ import { BadRequestError } from '../../Error/bad-request-error';
 import { NotFoundError } from '../../Error/not-found-error';
 import { AppError } from '../../Error/app-error';
 import { UnauthorizedError } from '../../Error/not-authorised';
+import { ForbiddenError } from '../../Error/forbidden.error';
 
 @Injectable()
 export class CustomerServiceService {
@@ -41,7 +42,8 @@ return new RequestOptions({ headers: headers });
 
     return this.http.get(this.url, options)
       .map(response =>
-        response.json() as Array<Customer>);
+        response.json() as Array<Customer>)
+        ._catch(this.handleError);
   }
 
 
@@ -79,6 +81,13 @@ return new RequestOptions({ headers: headers });
         // return Observable that includes an error and throw an error specific to our application domain type error (UnAuthoriseError)
         return Observable.throw(new UnauthorizedError(error));
       }
+
+        /* 403 ==> Forbidden, credentials correct, authentification correct but maybe
+        people with user role can't access/restricted from the resource */
+        if (error.status === 403) {
+          // return Observable that includes an error and throw an error specific to our application  domain type error (NotFoundError)
+          return Observable.throw(new ForbiddenError(error));
+        }
 
     // return Observable that includes an error and throw an error (unknown) to our application  domain type error (AppError)
         return Observable.throw(new AppError(error));

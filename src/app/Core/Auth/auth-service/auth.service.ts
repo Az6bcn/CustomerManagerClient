@@ -2,7 +2,7 @@ import { UserCredentials } from './../../../Model/UserCredential';
 import { Injectable } from '@angular/core';
 import { Http, RequestOptions, Headers } from '@angular/http';
 import 'rxjs/add/Operator/map';
-import { tokenNotExpired,JwtHelper } from 'angular2-jwt';
+import { tokenNotExpired, JwtHelper } from 'angular2-jwt';
 import { Observable } from 'rxjs/Observable';
 import { BadRequestError } from '../../../Error/bad-request-error';
 import { NotFoundError } from '../../../Error/not-found-error';
@@ -30,7 +30,7 @@ headers.append('Access-Control-Allow-Methods', '  POST');
 headers.append('Access-Control-Allow-Origin', '*');
 const options = new RequestOptions( {headers: headers});
 
-this.url= 'http://localhost:53800/api/accounts/login';
+this.url = 'http://localhost:53800/api/accounts/login';
   return this.http.post(this.url, credentials, options)
   .map(response => {     // Use MAP OPERATOR to Transform the Response to Javascript Array.
     const tokenAuthenticationResponse = response.json();
@@ -65,7 +65,7 @@ return (localStorage.getItem('token') != null) ? true : false;
 /**
  * Gets logged-in user's claims
  */
-getLoggedInUserClaims(){
+getLoggedInUserClaims() {
 
   const token = localStorage.getItem('token');
 
@@ -89,7 +89,7 @@ isLoggedIn() {
 
 
 
-register(registerCredentials){
+register(registerCredentials) {
 /**** CORS */
 const headers = new Headers();
 headers.append( 'Content-Type', 'application/json' );
