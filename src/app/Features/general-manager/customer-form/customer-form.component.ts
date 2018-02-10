@@ -1,21 +1,20 @@
-import { ActivatedRoute, Router } from '@angular/router';
-import { CountriesListService } from './../../../Shared/Services/countries-list.service';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
-import { IOption } from 'ng-select';
-import { Country } from '../../../Model/Country';
-import { forEach } from '@angular/router/src/utils/collection';
-import { Customer } from '../../../Model/Customer';
-import { CustomerServiceService } from '../../../Shared/Services/customer-service.service';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import 'rxjs/add/operator/finally';
-import swal from 'sweetalert2';
-
+import { ActivatedRoute, Router } from "@angular/router";
+import { CountriesListService } from "./../../../Shared/Services/countries-list.service";
+import { FormBuilder, Validators, FormGroup } from "@angular/forms";
+import { Component, OnInit } from "@angular/core";
+import { IOption } from "ng-select";
+import { Country } from "../../../Model/Country";
+import { forEach } from "@angular/router/src/utils/collection";
+import { Customer } from "../../../Model/Customer";
+import { CustomerServiceService } from "../../../Shared/Services/customer-service.service";
+import { BehaviorSubject } from "rxjs/BehaviorSubject";
+import "rxjs/add/operator/finally";
+import swal from "sweetalert2";
 
 @Component({
-  selector: 'app-customer-form',
-  templateUrl: './customer-form.component.html',
-  styleUrls: ['./customer-form.component.css']
+  selector: "app-customer-form",
+  templateUrl: "./customer-form.component.html",
+  styleUrls: ["./customer-form.component.css"]
 })
 export class CustomerFormComponent implements OnInit {
   customerForm: FormGroup;
@@ -33,7 +32,6 @@ export class CustomerFormComponent implements OnInit {
 
   ngOnInit() {
     this.loadCustomerForm();
-
     this.countriesService.getCountriesList().subscribe(response => {
       for (const country of response.countries) {
         // country = object of country,  country:{country_id :' AD' country_name:' ANDORRA' }
@@ -61,33 +59,33 @@ export class CustomerFormComponent implements OnInit {
   static getCustomerForm(fb: FormBuilder) {
     return fb.group({
       customerGroup: fb.group({
-        firstname: ['', [Validators.required]],
-        lastname: ['', [Validators.required]],
-        country: ['', [Validators.required]],
-        city: ['', Validators.required],
-        phone: ['', Validators.required]
+        firstname: ["", [Validators.required]],
+        lastname: ["", [Validators.required]],
+        country: ["", [Validators.required]],
+        city: ["", Validators.required],
+        phone: ["", Validators.required]
       })
     });
   }
 
   get Firstname() {
-    return this.customerForm.controls['customerGroup'].get('firstname');
+    return this.customerForm.controls["customerGroup"].get("firstname");
   }
 
   get Lastname() {
-    return this.customerForm.controls['customerGroup'].get('lastname');
+    return this.customerForm.controls["customerGroup"].get("lastname");
   }
 
   get Country() {
-    return this.customerForm.controls['customerGroup'].get('country');
+    return this.customerForm.controls["customerGroup"].get("country");
   }
 
   get City() {
-    return this.customerForm.controls['customerGroup'].get('city');
+    return this.customerForm.controls["customerGroup"].get("city");
   }
 
   get Phone() {
-    return this.customerForm.controls['customerGroup'].get('phone');
+    return this.customerForm.controls["customerGroup"].get("phone");
   }
 
   isValid(): boolean {
@@ -97,16 +95,19 @@ export class CustomerFormComponent implements OnInit {
   createNewCustomer(customerToCreate: FormGroup) {
     // console.log('CustomerTocreate is: ', customerToCreate.value);
     this.isSaving$.next(true);
-    this.customerService.createCustomer(customerToCreate.controls['customerGroup'].value)
-    .finally(() => {
-      this.isSaving$.next(false);
-    })
-    .subscribe((response) => {
-      if (response != null) {
-        swal('Created Successfully');
-          this.router.navigate(['../general-manager'], { relativeTo: this.activatedRoute });
-      }
-    });
+    this.customerService
+      .createCustomer(customerToCreate.controls["customerGroup"].value)
+      .finally(() => {
+        this.isSaving$.next(false);
+      })
+      .subscribe(response => {
+        if (response != null) {
+          swal("Created Successfully");
+          this.router.navigate(["../general-manager"], {
+            relativeTo: this.activatedRoute
+          });
+        }
+      });
   }
 }
 

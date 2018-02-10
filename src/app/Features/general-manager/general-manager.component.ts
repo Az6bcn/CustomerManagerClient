@@ -1,3 +1,4 @@
+import { UserHelper } from "./../../Shared/Helper/userHelper";
 import { SharedDataService } from "./../../Shared/Services/sharedDataService";
 import { Output, EventEmitter } from "@angular/core";
 import { ModalComponent } from "./../../Shared/Modal/modal/modal.component";
@@ -11,6 +12,8 @@ import { CustomerFormComponent } from "./customer-form/customer-form.component";
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { SimpleModalService } from "ngx-simple-modal";
 import { ViewChild, AfterViewInit } from "@angular/core";
+import { UserHelper } from "../../Shared/Helper/userHelper";
+import { RoleEnum } from "../../Model/RoleEnum";
 
 @Component({
   selector: "app-general-manager",
@@ -37,6 +40,7 @@ export class GeneralManagerComponent implements OnInit {
   ngOnInit() {
     this.isLoading$.next(true);
     this.getCustomerData();
+    this.getUserClaims();
   }
 
   showCustomerCards() {
@@ -94,5 +98,8 @@ export class GeneralManagerComponent implements OnInit {
     }
   }
 
-
+  getUserRole() {
+    const role = new UserHelper().getRole();
+    return role === RoleEnum.GeneralManager ? true : false;
+  }
 }
