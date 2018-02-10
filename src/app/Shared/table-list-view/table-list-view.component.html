@@ -1,4 +1,4 @@
-<section > 
+<section >
   <table class="table table-striped table-hover table-bordered">
     <thead class="thead-dark" *ngIf="tableHeader && tableHeader != null">
 
@@ -6,9 +6,10 @@
         <th>#</th>
         <th>{{tableHeader.FirstName}}</th>
         <th>{{tableHeader.Lastname}}</th>
+        <th>{{tableHeader.Phone}}</th>
         <th>{{tableHeader.City}}</th>
         <th>{{tableHeader.Country}}</th>
-        <th>{{tableHeader.Phone}}</th>
+        <th></th>
         <th>{{tableHeader.Orders}}</th>
         <th></th>
       </tr>
@@ -20,7 +21,7 @@
           <th>{{tableHeader.unitPrice}}</th>
           <th>{{tableHeader.IsDiscontinued}}</th>
         </tr>
-    
+
     </thead>
     <tbody *ngIf="!(isLoading$ | async)">
       <tr *ngFor="let data of dataToShowOnTable; let i = index">
@@ -30,12 +31,17 @@
         <td>{{data.phone || data.unitPrice}}</td>
         <td>{{data.city || data.isDiscontinued}}</td>
         <td>{{data.country}} </td>
+        <td>
+          <button (click)="editItemEmit(data)"><i class="fa fa-edit"></i></button>
+          <button><i class="fa fa-trash"></i></button>
+
+        </td>
         <!-- <td>{{data.order}}</td>  -->
         <!-- make it a like to orders page and send the order to the order page -->
       </tr>
- 
+
     </tbody>
-  </table> 
+  </table>
 
   <app-pagination
 [dataForTable]= "dataForTable"

@@ -5,8 +5,7 @@
       <div formGroupName="customerGroup">
         <div class="form-group">
           <label for="FirstnameLabel">Firstname</label>
-          <input formControlName="firstname" formtype="text" class="form-control" id="FirstnameId"
-          value=Firstname.value placeholder="Enter your firstname">
+          <input formControlName="firstname" formtype="text" class="form-control" id="FirstnameId" value=Firstname.value placeholder="Enter your firstname">
           <!--Another VALIDATION method get it from ts-->
           <div *ngIf="Firstname.touched && Firstname.invalid" class="alert alert-danger">
             <div *ngIf="Firstname.errors.required"> Please enter your Firstname</div>
@@ -25,7 +24,7 @@
 
         <div class="form-group">
           <label for="CountryLabel">Select your Country</label>
-          <ng-select formControlName="country" [options]="externalCountriesListAPI">
+          <ng-select formControlName="country" [options]="externalCountriesListAPI" [(ngModel)]="countryValue">
           </ng-select>
           <!--Another VALIDATION method get it from ts-->
           <div *ngIf="Country.touched && Country.invalid" class="alert alert-danger">
@@ -47,7 +46,7 @@
 
         <div class="form-group">
           <label for="phone">Phone</label>
-          <input formControlName="phone" type="number" formtype="text" class="form-control" id="phone" placeholder="Please enter your phone number">
+          <input formControlName="phone" type="number text" formtype="text" class="form-control" id="phone" placeholder="Please enter your phone number">
           <!--Another VALIDATION method get it from ts-->
           <div *ngIf="Phone.touched && Phone.invalid" class="alert alert-danger">
             <div *ngIf="Phone.errors.required">Please enter your phone number</div>
@@ -55,14 +54,13 @@
           </div>
         </div>
         <div>
-          <button type="button" class="btn btn-primary">Cancel</button>
-          <button type="button" class="btn btn-primary" [disabled]="isValid()"
-                    (click)="createNewCustomer(customerForm)">Submit
-                    <span *ngIf='(isSaving$ | async)'>
-                      <i class="fa fa-spinner fa-3x" aria-hidden="true">
-                        Creating new Customer!
-                      </i>
-                    </span>
+          <button type="button" class="btn btn-primary" (click)="cancel()">Cancel</button>
+          <button type="button" class="btn btn-primary" [disabled]="isValid(customerForm)" (click)="editCustomer(customerForm)">Submit
+            <span *ngIf='(isUpdating$ | async)'>
+              <i class="fa fa-spinner fa-3x" aria-hidden="true">
+                Updating Customer!
+              </i>
+            </span>
           </button>
         </div>
 

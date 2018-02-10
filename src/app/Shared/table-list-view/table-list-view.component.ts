@@ -15,6 +15,7 @@ export class TableListViewComponent implements OnInit {
   @Input() dataForTable: Array<any>;
   @Input() tableHeader: Object;
   @Input() modelType: string;
+  @Output() dataToEdit = new EventEmitter<any>();
 
   constructor() {
     this.dataToShowOnTable = null;
@@ -31,4 +32,11 @@ export class TableListViewComponent implements OnInit {
       this.isLoading$.next(false);
     }
   }
+
+private editItemEmit(item: any) {
+    if (item != null) {
+        this.dataToEdit.emit(item);
+    }
+}
+
 }

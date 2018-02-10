@@ -23,19 +23,20 @@
 
 
   <div *ngIf="showTable">
-      <button type="button" class="btn btn-link" (click)="newCustomerFormpage()">
-        Add New Cuctomer
-      </button>
+    <button type="button" class="btn btn-link" (click)="newCustomerFormpage()">
+      Add New Cuctomer
+    </button>
 
     <div class="container" *ngIf="!(isLoading$ | async)">
-      <app-table-list-view [dataForTable]="CustomersAndOrders" [tableHeader]="getHeaderObject()" [modelType]="getModelType()">
+      <app-table-list-view [dataForTable]="CustomersAndOrders" [tableHeader]="getHeaderObject()" [modelType]="getModelType()" (dataToEdit)="inComingDataToEdit($event)">
       </app-table-list-view>
     </div>
   </div>
 
   <span *ngIf='(isLoading$ | async)' class="text-center mx-auto">
-    <i class="fa fa-spinner fa-3x" aria-hidden="true">
+    <i class="fa fa-spinner fa-1x" aria-hidden="true">
       Loading data!
     </i>
   </span>
+
 </div>

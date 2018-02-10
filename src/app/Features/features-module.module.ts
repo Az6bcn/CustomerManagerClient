@@ -1,3 +1,4 @@
+import { CustomerEditFormComponent } from './/general-manager/customer-edit-form/customer-edit-form.component';
 import { ProductServiceService } from './../Shared/Services/product-service.service';
 import { CustomerServiceService } from './../Shared/Services/customer-service.service';
 import { TooltipModule } from 'ngx-tooltip';
@@ -16,6 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {SelectModule} from 'ng-select';
 import { CountriesListService } from '../Shared/Services/countries-list.service';
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -27,7 +29,7 @@ import { CountriesListService } from '../Shared/Services/countries-list.service'
   ],
   declarations: [GeneralManagerComponent,
     SectionManagerComponent,
-    ProductsManagerComponent, OrdersComponent, ProductsComponent, CustomerFormComponent],
+    ProductsManagerComponent, OrdersComponent, ProductsComponent, CustomerFormComponent, CustomerEditFormComponent],
   providers: [CustomerServiceService, ProductServiceService, CountriesListService]
 })
 export class FeaturesModuleModule { }

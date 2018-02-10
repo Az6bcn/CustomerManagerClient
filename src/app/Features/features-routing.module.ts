@@ -1,3 +1,4 @@
+import { CustomerEditFormComponent } from './general-manager/customer-edit-form/customer-edit-form.component';
 import { CustomerFormComponent } from './general-manager/customer-form/customer-form.component';
 import { ProductsComponent } from './products/products.component';
 import { OrdersComponent } from './orders/orders.component';
@@ -14,6 +15,7 @@ import { CommonModule } from '@angular/common';
     RouterModule.forChild([
       {path: 'general-manager', component:  GeneralManagerComponent},
       {path: 'new-customer', component:  CustomerFormComponent},
+      {path: 'edit-customer', component: CustomerEditFormComponent},
       {path: 'section-manager', component:  SectionManagerComponent},
       {path: 'products-manager', component: ProductsManagerComponent},
       {path: 'orders', component:  OrdersComponent},

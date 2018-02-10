@@ -53,7 +53,7 @@ export class CustomerFormComponent implements OnInit {
     });
   }
 
-  private loadCustomerForm() {
+  loadCustomerForm() {
     this.customerForm = CustomerFormComponent.getCustomerForm(this.formBuilder);
   }
 
