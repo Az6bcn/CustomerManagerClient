@@ -16,6 +16,7 @@ import { CustomerFormComponent } from './general-manager/customer-form/customer-
 import { ReactiveFormsModule } from '@angular/forms';
 import {SelectModule} from 'ng-select';
 import { CountriesListService } from '../Shared/Services/countries-list.service';
+import { GeneraManagerDashboardComponent } from './general-manager/genera-manager-dashboard/genera-manager-dashboard.component';
 
 
 @NgModule({
@@ -29,7 +30,7 @@ import { CountriesListService } from '../Shared/Services/countries-list.service'
   ],
   declarations: [GeneralManagerComponent,
     SectionManagerComponent,
-    ProductsManagerComponent, OrdersComponent, ProductsComponent, CustomerFormComponent, CustomerEditFormComponent],
+    ProductsManagerComponent, OrdersComponent, ProductsComponent, CustomerFormComponent, CustomerEditFormComponent, GeneraManagerDashboardComponent],
   providers: [CustomerServiceService, ProductServiceService, CountriesListService]
 })
 export class FeaturesModuleModule { }

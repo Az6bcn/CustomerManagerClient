@@ -5,20 +5,26 @@
     </div>
     <div *ngIf = "isLoggedIn$ | async">
       <ul class="nav navbar-nav" *ngFor="let menu of menuToLoad">
-       
+
          <li>
           <a routerLink = {{menu.route}}>{{menu.Title}} </a>
         </li>
 
       </ul>
-    </div> 
-
+    </div>
+    <div>
+        <ul class="nav navbar-nav">
+    <li routerLinkActive="active current" *ngIf="(isLoggedIn$ | async) && isUserRoleGeneralManager()">
+      <a routerLink = "/customer-manager/general-manager/dashboard">GeneralManager DashBoard</a>
+    </li>
+  </ul>
+  </div>
       <ul class="nav navbar-nav navbar-right">
 
               <li routerLinkActive="active current" *ngIf="!hideLogin()">
                 <a routerLink = "/account/login">Login </a>
               </li>
-              
+
               <li routerLinkActive="active current" *ngIf="!hideLogin()">
                 <a routerLink = "/account/register">Register</a>
               </li>
@@ -31,6 +37,6 @@
                 <a routerLink = "/home">HomePage</a>
               </li>
       </ul>
-      
+
     </div>
 </nav>

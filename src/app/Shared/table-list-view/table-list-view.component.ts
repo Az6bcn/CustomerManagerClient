@@ -16,6 +16,7 @@ export class TableListViewComponent implements OnInit {
   @Input() tableHeader: Object;
   @Input() modelType: string;
   @Output() dataToEdit = new EventEmitter<any>();
+  @Output() dataToDelete = new EventEmitter<any>();
 
   constructor() {
     this.dataToShowOnTable = null;
@@ -33,10 +34,15 @@ export class TableListViewComponent implements OnInit {
     }
   }
 
-private editItemEmit(item: any) {
+  private editItemEmit(item: any) {
     if (item != null) {
-        this.dataToEdit.emit(item);
+      this.dataToEdit.emit(item);
     }
-}
+  }
 
+  private deleteItemEmit(item: any) {
+    if (item != null) {
+      this.dataToDelete.emit(item);
+    }
+  }
 }

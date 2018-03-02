@@ -1,4 +1,4 @@
-<section >
+<section>
   <table class="table table-striped table-hover table-bordered">
     <thead class="thead-dark" *ngIf="tableHeader && tableHeader != null">
 
@@ -15,12 +15,12 @@
       </tr>
 
       <tr *ngIf="modelType == 'Products'">
-          <th>#</th>
-          <th>{{tableHeader.name}}</th>
-          <th>{{tableHeader.package}}</th>
-          <th>{{tableHeader.unitPrice}}</th>
-          <th>{{tableHeader.IsDiscontinued}}</th>
-        </tr>
+        <th>#</th>
+        <th>{{tableHeader.name}}</th>
+        <th>{{tableHeader.package}}</th>
+        <th>{{tableHeader.unitPrice}}</th>
+        <th>{{tableHeader.IsDiscontinued}}</th>
+      </tr>
 
     </thead>
     <tbody *ngIf="!(isLoading$ | async)">
@@ -32,8 +32,12 @@
         <td>{{data.city || data.isDiscontinued}}</td>
         <td>{{data.country}} </td>
         <td>
-          <button (click)="editItemEmit(data)"><i class="fa fa-edit"></i></button>
-          <button><i class="fa fa-trash"></i></button>
+          <button (click)="editItemEmit(data)">
+            <i class="fa fa-edit"></i>
+          </button>
+          <button (click)="deleteItemEmit(data)">
+            <i class="fa fa-trash"></i>
+          </button>
 
         </td>
         <!-- <td>{{data.order}}</td>  -->
@@ -43,10 +47,8 @@
     </tbody>
   </table>
 
-  <app-pagination
-[dataForTable]= "dataForTable"
-(dataForTableEmit) = "paginatedDataToDisplayOnTable($event)">
+  <app-pagination [dataForTable]="dataForTable" (dataForTableEmit)="paginatedDataToDisplayOnTable($event)">
   </app-pagination>
-  </section>
+</section>
 
-  <!-- {{isLoading$.value}} -->
+<!-- {{isLoading$.value}} -->

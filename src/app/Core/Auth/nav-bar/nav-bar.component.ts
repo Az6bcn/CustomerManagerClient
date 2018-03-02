@@ -1,7 +1,10 @@
+import { UserHelper } from './../../../Shared/Helper/userHelper';
+
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { Router, ActivatedRoute } from "@angular/router";
 import { AuthService } from "./../auth-service/auth.service";
 import { Component, OnInit } from "@angular/core";
+import { RoleEnum } from '../../../Model/RoleEnum';
 
 @Component({
   selector: "app-nav-bar",
@@ -89,5 +92,10 @@ export class NavBarComponent implements OnInit {
     if (this.authService.checkLocalStorageForToken()) {
       this.getLoggedInUserRole();
     }
+  }
+
+  public isUserRoleGeneralManager(): boolean {
+    const role = new UserHelper().getRole();
+    return role === RoleEnum.GeneralManager ? true : false;
   }
 }

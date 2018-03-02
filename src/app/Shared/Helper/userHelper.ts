@@ -1,3 +1,4 @@
+import { RoleEnum } from './../../Model/RoleEnum';
 import { JwtHelper } from "angular2-jwt";
 
 export class UserHelper {
@@ -14,7 +15,10 @@ export class UserHelper {
     }
   }
 
-  getRole() {
+  /**
+   * Returns the role of the user Token
+  */
+  getRole(): RoleEnum {
     const token = localStorage.getItem("token");
 
     if (!token) return null;
@@ -23,7 +27,8 @@ export class UserHelper {
       const claims = new JwtHelper().decodeToken(token);
 
       if (claims && claims != null) {
-        return claims.Role;
+        const role: string = claims.Role;
+        return RoleEnum[role];
       }
     }
   }
