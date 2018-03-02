@@ -8,11 +8,13 @@ import { GeneralManagerComponent } from './general-manager/general-manager.compo
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { GeneraManagerDashboardComponent } from './general-manager/genera-manager-dashboard/genera-manager-dashboard.component';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild([
+      {path: 'general-manager/dashboard', component:  GeneraManagerDashboardComponent},
       {path: 'general-manager', component:  GeneralManagerComponent},
       {path: 'new-customer', component:  CustomerFormComponent},
       {path: 'edit-customer', component: CustomerEditFormComponent},

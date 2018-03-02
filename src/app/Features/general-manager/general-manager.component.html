@@ -28,7 +28,9 @@
     </button>
 
     <div class="container" *ngIf="!(isLoading$ | async)">
-      <app-table-list-view [dataForTable]="CustomersAndOrders" [tableHeader]="getHeaderObject()" [modelType]="getModelType()" (dataToEdit)="inComingDataToEdit($event)">
+      <app-table-list-view [dataForTable]="CustomersAndOrders" [tableHeader]="getHeaderObject()"
+      [modelType]="getModelType()" (dataToEdit)="inComingDataToEdit($event)"
+        (dataToDelete)="incomingDataToDelete($event)">
       </app-table-list-view>
     </div>
   </div>

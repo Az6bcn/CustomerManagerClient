@@ -1,4 +1,4 @@
-import { UserHelper } from "./../../Shared/Helper/userHelper";
+import swal from "sweetalert2";
 import { SharedDataService } from "./../../Shared/Services/sharedDataService";
 import { Output, EventEmitter } from "@angular/core";
 import { ModalComponent } from "./../../Shared/Modal/modal/modal.component";
@@ -26,7 +26,6 @@ export class GeneralManagerComponent implements OnInit {
   public CustomersAndOrders: Array<Customer>;
   public isLoading$ = new BehaviorSubject<boolean>(false);
   editCustomerForm: FormGroup;
-  @Output() itemToEditEventEmit = new EventEmitter<any>();
 
   constructor(
     private customerService: CustomerServiceService,
@@ -40,7 +39,7 @@ export class GeneralManagerComponent implements OnInit {
   ngOnInit() {
     this.isLoading$.next(true);
     this.getCustomerData();
-    this.getUserClaims();
+    this.getUserRole();
   }
 
   showCustomerCards() {
@@ -98,8 +97,44 @@ export class GeneralManagerComponent implements OnInit {
     }
   }
 
-  getUserRole() {
+  private getUserRole(): boolean {
     const role = new UserHelper().getRole();
     return role === RoleEnum.GeneralManager ? true : false;
   }
+
+  private incomingDataToDelete(itemToDelete: Customer) {
+    if (itemToDelete) {
+    this.showConfirm(itemToDelete);
+    }
+  }
+
+  showConfirm(itemToDelete: Customer) {
+    this.simpleModalService.addModal(ModalComponent, {
+          title: 'Delete Customer',
+          message: 'Are you sure you want to delete this Customer?'
+        })
+        .subscribe((isConfirmed) => {
+            //We get modal result
+            if (isConfirmed) { // Ok
+                  if (itemToDelete) {
+                    if (this.getUserRole()) {
+                      // delete the item, send it to the api to delete:
+                      this.customerService
+                        .deleteCustomer(itemToDelete)
+                        .subscribe(response => {
+                            const index = this.CustomersAndOrders.indexOf(itemToDelete);
+                            this.CustomersAndOrders.splice(index, 1);
+                          swal("Customer deleted!");
+
+                        });
+                    } else {
+                      swal("Only General Managers can delete!");
+                    }
+                  }
+            }
+            else { // Cancel
+
+            }
+        });
+}
 }

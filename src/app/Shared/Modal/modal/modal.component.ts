@@ -12,7 +12,6 @@ export class ModalComponent extends SimpleModalComponent<ModalModel, boolean> im
 
   title: string;
   message: string;
-  customerForm: FormGroup;
 
   constructor() {
     super();

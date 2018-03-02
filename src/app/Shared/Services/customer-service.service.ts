@@ -32,8 +32,8 @@ export class CustomerServiceService {
   }
 
   getCustomersAndOrder(): Observable<Array<Customer>> {
-    this.url = "http://localhost:53800/api/customer/allcustomersorder";
-
+    //this.url = "http://localhost:53800/api/customer/allcustomersorder";
+    this.url = "http://localhost:53800/api/customer/allcustomers";
     const options = this.getOptions();
 
     return this.http
@@ -54,14 +54,24 @@ export class CustomerServiceService {
   }
 
   updateCustomer(customer: Customer): Observable<Customer> {
-    this.url = `http://localhost:53800/api/customer/edit-customer/${
-      customer.id
-    }`;
-    console.log(this.url);
+    this.url = `http://localhost:53800/api/customer/edit-customer/${customer.id}`;
+
     const options = this.getOptions();
 
     return this.http
       .put(this.url, customer, options)
+      .map(response => response.json())
+      ._catch(this.handleError);
+  }
+
+
+  deleteCustomer(customer: Customer): Observable<Customer> {
+    this.url = `http://localhost:53800/api/customer/delete-customer/${customer.id}`;
+
+    const options = this.getOptions();
+
+    return this.http
+      .delete(this.url, options)
       .map(response => response.json())
       ._catch(this.handleError);
   }
