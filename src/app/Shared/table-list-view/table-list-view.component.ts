@@ -11,13 +11,12 @@ import { Product } from "../../Model/Product";
 export class TableListViewComponent implements OnInit {
   public isLoading$ = new BehaviorSubject(false);
   public dataToShowOnTable: Array<Customer>;
-
-  @Input() dataForTable: Array<any>;
+  isLoading2$ = new BehaviorSubject(false);
+  @Input() dataForTable: Array<Customer>;
   @Input() tableHeader: Object;
   @Input() modelType: string;
   @Output() dataToEdit = new EventEmitter<any>();
   @Output() dataToDelete = new EventEmitter<any>();
-
   constructor() {
     this.dataToShowOnTable = null;
   }

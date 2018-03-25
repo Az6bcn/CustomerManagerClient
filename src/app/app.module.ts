@@ -12,6 +12,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { SelectModule } from 'ng-select';
 import { SimpleModalModule } from 'ngx-simple-modal';
 
+
+
 @NgModule({
   declarations: [AppComponent, HomeComponent, NotFoundComponent],
   imports: [
@@ -20,7 +22,7 @@ import { SimpleModalModule } from 'ngx-simple-modal';
     SharedModuleModule, // Shared (multi-instance) objects
     HttpModule,
     AppRoutingModule, // app routing module
-    SelectModule,
+    SelectModule
     // SimpleModalModule
   ],
   providers: [],

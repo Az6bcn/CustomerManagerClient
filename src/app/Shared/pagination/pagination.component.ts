@@ -1,5 +1,6 @@
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Customer } from "./../../Model/Customer";
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges } from "@angular/core";
 
 @Component({
   selector: "app-pagination",
@@ -20,9 +21,20 @@ export class PaginationComponent implements OnInit {
   pagesIndex: Array<number>;
   pageStart: number = 1;
   inputName: string = "";
-  @Input() dataForTable: Array<Customer>;
+  @Input() dataForTable = new  Array<Customer>();
   @Output() dataForTableEmit = new EventEmitter<Array<Customer>>();
   constructor() {}
+  isLoading$ = new BehaviorSubject(false);
+
+// // tslint:disable-next-line:use-life-cycle-interface
+// ngOnChanges(changes: SimpleChanges) {
+//   console.log(changes);
+//   console.log(JSON.stringify(changes.currentValue));
+//   if (this.dataForTable) {
+//     this.refreshItems();
+//     }
+// }
+
 
   ngOnInit() {
     this.currentIndex = 1;
@@ -38,9 +50,14 @@ export class PaginationComponent implements OnInit {
       this.pages = this.pageNumber;
     }
 
-    this.refreshItems();
+      this.refreshItems();
+
+
     if (this.items) this.dataForTableEmit.emit(this.items);
   }
+
+
+
 
   private fillArray(): any {
     var obj = new Array();
@@ -55,12 +72,15 @@ export class PaginationComponent implements OnInit {
   }
 
   private refreshItems() {
+    console.log("dataaaaPagination3333", this.dataForTable);
+    console.log("dataaaaPagination2222", this.dataForTable);
     this.items = this.dataForTable.slice(
-      (this.currentIndex - 1) * this.pageSize,
+      ((this.currentIndex - 1) * this.pageSize),
       this.currentIndex * this.pageSize
     );
     this.pagesIndex = this.fillArray();
   }
+
 
   prevPage() {
     if (this.currentIndex > 1) {
@@ -93,7 +113,6 @@ export class PaginationComponent implements OnInit {
 }
 
 /*
-
 items attribute: is an array of ‘Customers’ used to stock the result of the search process executed by ‘FilterByName’ function.
 pageSize attribute : indicate the number of entries per page,
 pages : is a maximum of Page numbers that can be displayed in pagination bar (it’s the size of ‘pagesIndex’ array).
@@ -109,5 +128,4 @@ refreshItems method : refresh the content of table depending mainly on values of
 prevPage method : this function will decrease the selected page index (‘currentIndex’) by one, and will refresh the display.
 nextPage method : this function will increase the selected page index (‘currentIndex’) by one, and will refresh the display.
 setPage method : invoked when user select a number from pagination. It will modify the ‘currentIndex’ value and refresh the view.
-
 */
