@@ -1,3 +1,4 @@
+import { Product } from './../../Model/Product';
 import { Customer } from "./../../Model/Customer";
 import { RequestOptions, Headers, Http } from "@angular/http";
 import { Injectable } from "@angular/core";
@@ -42,6 +43,51 @@ export class CustomerServiceService {
       ._catch(this.handleError);
   }
 
+
+  getCustomersCreatedByCustomerManager(): Observable<Array<Customer>> {
+    this.url = "http://localhost:53800/api/customer/allcustomers-createdby-customer-manager";
+    const options = this.getOptions();
+
+    return this.http
+      .get(this.url, options)
+      .map(response => response.json() as Array<Customer>)
+      ._catch(this.handleError);
+  }
+
+
+  getCustomersCreatedByGeneralManager(): Observable<Array<Customer>> {
+    this.url = "http://localhost:53800/api/customer/allcustomers-createdby-general-manager";
+    const options = this.getOptions();
+
+    return this.http
+      .get(this.url, options)
+      .map(response => response.json() as Array<Customer>)
+      ._catch(this.handleError);
+  }
+
+
+  getCustomersCreatedByProductManager(): Observable<Array<Customer>> {
+    this.url = "http://localhost:53800/api/customer/allcustomers-createdby-product-manager";
+    const options = this.getOptions();
+
+    return this.http
+      .get(this.url, options)
+      .map(response => response.json() as Array<Customer>)
+      ._catch(this.handleError);
+  }
+
+
+  getCustomersCreatedBySectionManager(): Observable<Array<Customer>> {
+    this.url = "http://localhost:53800/api/customer/allcustomers-createdby-section-manager";
+    const options = this.getOptions();
+
+    return this.http
+      .get(this.url, options)
+      .map(response => response.json() as Array<Customer>)
+      ._catch(this.handleError);
+  }
+
+
   createCustomer(customer: Customer): Observable<Customer> {
     this.url = "http://localhost:53800/api/customer";
 
@@ -76,6 +122,28 @@ export class CustomerServiceService {
       ._catch(this.handleError);
   }
 
+
+  approveCustomer(cus: Customer): Observable<boolean> {
+      this.url = `http://localhost:53800/api/customer/approve-customer`;
+
+      const options = this.getOptions();
+
+      return this.http
+        .put(this.url, cus, options)
+        .map(response => response.json())
+        ._catch(this.handleError);
+  }
+
+  approveProduct(cus: Product): Observable<boolean> {
+    this.url = `http://localhost:53800/api/customer/approve-product`;
+
+    const options = this.getOptions();
+
+    return this.http
+      .put(this.url, cus, options)
+      .map(response => response.json())
+      ._catch(this.handleError);
+}
   // Method to handle Server Response Error
   private handleError(error: Response) {
     /* Handling Expected Error (Imagine we sending invalid data to the Server response will be Bad Request, status code 400)

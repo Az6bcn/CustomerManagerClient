@@ -17,7 +17,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {SelectModule} from 'ng-select';
 import { CountriesListService } from '../Shared/Services/countries-list.service';
 import { GeneraManagerDashboardComponent } from './general-manager/genera-manager-dashboard/genera-manager-dashboard.component';
-
+import { NotApprovedCustomerManagersCustomersComponent } from './general-manager/not-approved-customer-managers-customers/not-approved-customer-managers-customers.component';
+import { NotApprovedProductManagerProductsComponent } from './general-manager/not-approved-product-manager-products/not-approved-product-manager-products.component';
+// import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   imports: [
@@ -30,7 +32,9 @@ import { GeneraManagerDashboardComponent } from './general-manager/genera-manage
   ],
   declarations: [GeneralManagerComponent,
     SectionManagerComponent,
-    ProductsManagerComponent, OrdersComponent, ProductsComponent, CustomerFormComponent, CustomerEditFormComponent, GeneraManagerDashboardComponent],
+    ProductsManagerComponent, OrdersComponent, ProductsComponent, CustomerFormComponent,
+    CustomerEditFormComponent, GeneraManagerDashboardComponent, NotApprovedCustomerManagersCustomersComponent,
+  NotApprovedProductManagerProductsComponent],
   providers: [CustomerServiceService, ProductServiceService, CountriesListService]
 })
 export class FeaturesModuleModule { }

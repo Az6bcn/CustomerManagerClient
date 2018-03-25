@@ -1,0 +1,18 @@
+.box-form {
+  margin-bottom: 20px;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(78, 80, 95, 0.25);
+  box-shadow: 0px 0px 5px 0px rgba(78, 80, 95, 0.25);
+  border-radius: 3px;
+  background-color: #ffffff; }
+
+
+  .small-padding {
+    padding: 15px; }
+    @media only screen and (min-width: 992px) {
+      .small-padding {
+        padding: 24px; } }
+
+
+        .row {
+          margin-left: -8px;
+          margin-right: -8px; }
